@@ -11,29 +11,85 @@
     <main id="app">
       <div class="todolist">
         <div class="row header">
-          <div class="cell">0</div>
-          <div class="cell">
-            adsfffffffffffffffffffffffffffffffffffffasdfafasdfa s s s s ss s
+          <div class="cell"></div>
+          <div class="cell">Name</div>
+          <div class="cell">Created</div>
+          <div class="cell">Category</div>
+          <div class="cell">Content</div>
+          <div class="cell">Dates</div>
+          <div class="cell btnRow">
+            <div></div>
+            <div class="myBtn archiveAll">
+              <img src="/src/img/archiveWhite.png" alt="bin" />
+            </div>
+            <div class="myBtn deleteAll">
+              <img src="/src/img/binWhite.png" alt="bin" />
+            </div>
           </div>
-          <div class="cell">2</div>
-          <div class="cell">3</div>
-          <div class="cell">4</div>
-          <div class="cell">5</div>
-          <div class="cell">6</div>
         </div>
-        <div class="row">
-          <div class="cell">0</div>
-          <div class="cell">
-            adsfffffffffffffffffffffffffffffffffffffasdfafasdfa s s s s ss s
-          </div>
-          <div class="cell">2</div>
-          <div class="cell">3</div>
-          <div class="cell">4</div>
-          <div class="cell">5</div>
-          <div class="cell">6</div>
+        <!-- <div class="rows"></div> -->
+      </div>
+      <div class="createNoteLeft">
+        <button class="createNote">Create Note</button>
+      </div>
+      <form onsubmit="return false;" class="form">
+        <h3>Create note</h3>
+        <div>
+          <label for="">Note name</label>
+          <input type="text" class="cell name" placeholder="Enter note name" />
+        </div>
+
+        <div>
+          <label>Category</label>
+          <select name="select" class="cell category">
+            <option value="Task">Task</option>
+            <option value="Random Thought" selected>Random Thought</option>
+            <option value="Idea">Idea</option>
+          </select>
+        </div>
+        <div>
+          <label for="">Content</label>
+          <input type="text" class="cell content" placeholder="Enter content" />
+        </div>
+
+        <div>
+          <button class="createNote">Create Note</button>
+        </div>
+      </form>
+
+      <form onsubmit="return false;" class="formEdit">
+        <h3>Edit note</h3>
+        <div>
+          <label for="">Note name</label>
+          <input type="text" class="cell nameEdit" placeholder="Enter note name" />
+        </div>
+
+        <div>
+          <label>Category</label>
+          <select name="select" class="cell categoryEdit">
+            <option value="Task">Task</option>
+            <option value="Random Thought">Random Thought</option>
+            <option value="Idea">Idea</option>
+          </select>
+        </div>
+        <div>
+          <label for="">Content</label>
+          <input type="text" class="cell contentEdit" placeholder="Enter content" />
+        </div>
+
+        <div>
+          <button class="save">Save Note</button>
+        </div>
+      </form>
+
+      <div class="categorylist">
+        <div class="row header">
+          <div class="cell"></div>
+          <div class="cell">Note Category</div>
+          <div class="cell">Active</div>
+          <div class="cell">Archived</div>
         </div>
       </div>
-      <form action=""></form>
     </main>
     <script type="module" src="/src/app.js"></script>
   </body>

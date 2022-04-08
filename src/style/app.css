@@ -1,8 +1,16 @@
-.row {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+.todolist > .row {
   display: grid;
   grid-template-columns: 100px repeat(5, minmax(125px, 1fr)) 100px;
   min-width: 900px;
-  margin-top: 10px;
+  margin: 10px;
 }
 .cell {
   text-overflow: ellipsis;
@@ -20,4 +28,65 @@
   background-color: unset;
   color: #ffffff;
   border: none;
+}
+.categorylist > .row.header {
+  margin-top: 20px;
+  margin: 10px;
+}
+.categorylist > .row {
+  display: grid;
+  grid-template-columns: 100px repeat(3, minmax(125px, 1fr));
+  min-width: 900px;
+  margin: 10px;
+}
+.btnRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(30px, 1fr));
+}
+.createNote,
+.save {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 10px;
+}
+.form input,
+.form select,
+.form label {
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+}
+.createNoteLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.myBtn {
+  cursor: pointer;
+}
+.myBtn img {
+  width: 25px;
+}
+
+.cell > img {
+  width: 40px;
+}
+.formEdit {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 10px;
+}
+.formEdit input,
+.formEdit select,
+.formEdit label {
+  width: 150px;
+  height: 40px;
+  display: inline-block;
 }
