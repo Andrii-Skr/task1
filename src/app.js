@@ -85,14 +85,12 @@ const icons = {
 
 const addEditHandler = () => {
   const formEdit = document.querySelector(".formEdit");
-
   const editBtn = document.querySelectorAll(".edit");
   const createNode = document.querySelector(".createNoteLeft .createNote");
   editBtn.forEach((el, i) => {
     el.addEventListener("click", (e) => {
       formEdit.style.display = "flex";
       createNode.style.display = "none";
-      const a = formEdit.b();
       el.style.display = "none";
       eIndex = e.target.parentNode.parentNode.parentNode.getAttribute("data-index");
       document.querySelector(".nameEdit").value = taskList[eIndex].name;
