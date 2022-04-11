@@ -1,4 +1,4 @@
-import { drawTable } from "/src/app.js";
+import { drawTable } from "./drawTable.js";
 import updateStat from "./updateStat.js";
 import { setTaskList } from "/src/app.js";
 
@@ -11,7 +11,7 @@ const addArchiveHandler = (taskList) => {
       console.log(index);
       taskList[index].archive = !taskList[index].archive;
       setTaskList(taskList);
-      drawTable();
+      drawTable(taskList);
       updateStat(taskList);
     });
   });
