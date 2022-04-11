@@ -1,4 +1,4 @@
-import { drawTable } from "/src/app.js";
+import { drawTable } from "./drawTable.js";
 import updateStat from "./updateStat.js";
 import { setTaskList } from "/src/app.js";
 
@@ -11,7 +11,7 @@ const addDeleteHandler = (taskList) => {
       taskList.splice(dIndex, 1);
 
       setTaskList(taskList);
-      drawTable();
+      drawTable(taskList);
       updateStat(taskList);
     });
   });

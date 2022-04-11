@@ -1,16 +1,13 @@
 import showArchive from "./components/showArchive.js";
 import updateStat from "./components/updateStat.js";
 import drawStat from "./components/drawStat.js";
-import addDeleteHandler from "./components/addDeleteHandler.js";
-import deleteAll from "./components/deleteAll.js";
-import addArchiveHandler from "./components/addArchiveHandler.js";
+import { drawTable, getArchiveStateNow } from "./components/drawTable.js";
+import { addSaveHandler } from "./components/addEditSaveHandler.js";
 
 window.addEventListener("error", function (event) {
   console.error("global", event.error);
 });
 
-let eIndex = undefined;
-let archiveState = !true;
 let taskList = [
   {
     name: "shop list",
@@ -48,7 +45,7 @@ let taskList = [
     name: "New bla bla",
     created: new Date().toLocaleDateString(),
     category: "Task",
-    content: "some text",
+    content: "some text 22",
     dates: "",
     archive: false,
   },
@@ -56,7 +53,7 @@ let taskList = [
     name: "New bla bla",
     created: new Date().toLocaleDateString(),
     category: "Task",
-    content: "some text",
+    content: "some text 123",
     dates: "",
     archive: false,
   },
@@ -64,7 +61,7 @@ let taskList = [
     name: "New bla bla",
     created: new Date().toLocaleDateString(),
     category: "Random Thought",
-    content: "some text",
+    content: "some text 1.2.22",
     dates: "",
     archive: false,
   },
@@ -77,89 +74,9 @@ let taskList = [
     archive: false,
   },
 ];
-const icons = {
-  Task: '<img src="/src/img/Task.png" alt="icon" />',
-  "Random Thought": '<img src="/src/img/Random.png" alt="icon" />',
-  Idea: '<img src="/src/img/Idea.png" alt="icon" />',
-};
 
-const addEditHandler = () => {
-  const formEdit = document.querySelector(".formEdit");
-  const editBtn = document.querySelectorAll(".edit");
-  const createNode = document.querySelector(".createNoteLeft .createNote");
-  editBtn.forEach((el, i) => {
-    el.addEventListener("click", (e) => {
-      formEdit.style.display = "flex";
-      createNode.style.display = "none";
-      el.style.display = "none";
-      eIndex = e.target.parentNode.parentNode.parentNode.getAttribute("data-index");
-      document.querySelector(".nameEdit").value = taskList[eIndex].name;
-      document.querySelector(".categoryEdit").value = taskList[eIndex].category;
-      document.querySelector(".contentEdit").value = taskList[eIndex].content;
-    });
-  });
-};
-
-const addSaveHandler = () => {
-  const saveBtn = document.querySelector(".save");
-  const formEdit = document.querySelector(".formEdit");
-  const createNode = document.querySelector(".createNoteLeft .createNote");
-  saveBtn.addEventListener("click", () => {
-    formEdit.style.display = "none";
-    createNode.style.display = "block";
-
-    taskList[eIndex].name = document.querySelector(".nameEdit").value;
-    taskList[eIndex].category = document.querySelector(".categoryEdit").value;
-    taskList[eIndex].content = document.querySelector(".contentEdit").value;
-    taskList[eIndex].created = new Date().toLocaleDateString();
-
-    drawTable();
-  });
-};
-
-const setArchiveState = (state) => {
-  archiveState = state;
-};
 const setTaskList = (list) => {
   taskList = list;
-};
-
-const drawTable = () => {
-  deleteAll();
-
-  const afterRow = document.querySelector(".todolist");
-  taskList.forEach((el, i) => {
-    if (el.archive !== archiveState) return;
-
-    const addRow = document.createElement("div");
-    addRow.setAttribute("data-index", i);
-    addRow.className = "row";
-
-    el.content
-      .split(" ")
-      .forEach((e) =>
-        e.match(/^\d{2}[.-/]\d{2}[.-/](\d{2}|\d{4})$/) !== null ? (el.dates = e) : (el.dates = "")
-      );
-
-    const row = `<div class="cell">${icons[el.category]}</div>
-          <div class="cell">${el.name}</div> 
-          <div class="cell">${el.created}</div> 
-          <div class="cell">${el.category}</div> 
-          <div class="cell">${el.content}</div> 
-          <div class="cell">${el.dates}</div> 
-          <div class="cell btnRow"> 
-            <div class="myBtn edit"><img src="/src/img/edit.png" alt="edit" title='edit'/></div> 
-            <div class="myBtn archive"><img src="/src/img/archiveBlack.png" alt="archive" title='add to archive/remove from archive'/></div> 
-            <div class="myBtn delete"><img src="/src/img/binBlack.png" alt="delete" title='delete'/></div>
-          </div>`;
-
-    addRow.innerHTML = row;
-    afterRow.append(addRow);
-  });
-
-  addArchiveHandler(taskList);
-  addEditHandler();
-  addDeleteHandler(taskList);
 };
 
 const init = (eIndex) => {
@@ -170,7 +87,7 @@ const init = (eIndex) => {
     taskList = [];
 
     updateStat(taskList);
-    drawTable();
+    drawTable(taskList);
   });
 
   createNode.addEventListener("click", () => {
@@ -199,15 +116,15 @@ const init = (eIndex) => {
         archive: false,
       });
 
-      drawTable();
+      drawTable(taskList);
       updateStat(taskList);
     }
   });
 
   drawStat(taskList);
-  drawTable();
-  showArchive(archiveState);
-  addSaveHandler();
+  drawTable(taskList);
+  showArchive(taskList, getArchiveStateNow());
+  addSaveHandler(taskList);
 };
 try {
   init();
@@ -215,4 +132,4 @@ try {
   console.log("Error", error);
 }
 
-export { drawTable, setArchiveState, setTaskList };
+export { setTaskList };
